@@ -20,9 +20,14 @@ interface TimelineProps {
 export default function Timeline({ items: initialItems, onItemUpdate }: TimelineProps) {
   const [items, setItems] = useState<TimelineItemType[]>(initialItems)
   const lanes = assignLanes(items)
-
+  
   const [zoomLevel, setZoomLevel] = useState(1)
   const [isDraggingOver, setIsDraggingOver] = useState(false)
+
+  const [isTouchDragging, setIsTouchDragging] = useState(false)
+  const handleTouchDragStart = (ref: boolean): void => setIsTouchDragging(ref)
+  const handleTouchDragEnd = (ref: boolean): void => setIsTouchDragging(ref)
+  console.log(isTouchDragging)
 
   const earliest = new Date( Math.min(...items.map(item => parseISO(item.start).getTime())))
   const latest = new Date(Math.max(...items.map(item => parseISO(item.end).getTime())))
@@ -118,10 +123,15 @@ export default function Timeline({ items: initialItems, onItemUpdate }: Timeline
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full">
           <div
             className={`relative ${isDraggingOver ? "bg-gray-50" : ""}`}
-            style={{ width: `${totalDays * dayWidth}px`, minHeight: `${lanes.length * 50}px` }}
+            style={{ 
+              width: `${totalDays * dayWidth}px`, 
+              minHeight: `${lanes.length * 50}px`, 
+              minWidth: "100vw",
+              touchAction: isTouchDragging ? "none" : "auto" 
+            }}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
           >
@@ -138,6 +148,8 @@ export default function Timeline({ items: initialItems, onItemUpdate }: Timeline
                     getPositionForDate={getPositionForDate}
                     onDragEnd={handleItemDragEnd}
                     onNameUpdate={handleItemNameUpdate}
+                    onTouchDragStart={handleTouchDragStart}
+                    onTouchDragEnd={handleTouchDragEnd}
                   />                  
                 ))}
               </div>

@@ -6,7 +6,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
   TextField
 } from "@mui/material"
 
@@ -29,9 +28,18 @@ export default function EditItem({ open, onClose, onSave, defaultName }: EditIte
   }
   
   return (
-    <Dialog open={open} onClose={onClose} >
-      <DialogTitle>Edit Item Name</DialogTitle>
-      <DialogContent>
+    <Dialog 
+      open={open} 
+      onClose={onClose} 
+      slotProps={{
+        paper: {
+          className: "rounded-xl bg-white p-4 shadow-lg",
+          style: { minWidth: 320 }
+        }
+      }}
+    >
+      <DialogTitle className="font-bold text-lg pb-0">Edit Item Name</DialogTitle>
+      <DialogContent className="pt-2 pb-4">
         <TextField
           autoFocus
           fullWidth
@@ -39,13 +47,28 @@ export default function EditItem({ open, onClose, onSave, defaultName }: EditIte
           value={editedName}
           onChange={(e) => setEditedName(e.target.value)}
           margin="dense"
+          slotProps={{
+            input: {
+              className: "rounded-md bg-gray-100"
+            }
+          }}
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSave} variant="contained" color="primary">
+      <DialogActions className="flex justify-end gap-2 pb-2">
+        <button 
+          type="button"
+          onClick={onClose}
+          className="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium"
+        >
+          Cancel
+        </button>
+        <button 
+          type="button"
+          onClick={handleSave} 
+          className="px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-medium"
+        >
           Save
-        </Button>
+        </button>
       </DialogActions>
     </Dialog>
   )

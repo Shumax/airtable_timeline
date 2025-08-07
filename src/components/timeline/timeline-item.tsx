@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 
 import { Tooltip } from "@mui/material"
 import EditItem from "./modal/edit-item"
+import { Pencil } from "lucide-react"
 
 import type { TimelineItemType } from "@/types/timeline"
 import type React from "react"
@@ -15,6 +16,8 @@ interface TimelineItemProps {
   getPositionForDate: (date: string) => number
   onDragEnd: (itemId: number, daysDelta: number) => void
   onNameUpdate?: (itemId: number, newName: string) => void
+  onTouchDragStart?: (ref: boolean) => void
+  onTouchDragEnd?: (ref: boolean) => void
 }
 
 export default function TimelineItem({
@@ -23,7 +26,9 @@ export default function TimelineItem({
   dayWidth,
   getPositionForDate,
   onDragEnd,
-  onNameUpdate
+  onNameUpdate,
+  onTouchDragStart,
+  onTouchDragEnd
 }: TimelineItemProps) {
   const [itemWidth, setItemWidth] = useState(0)
   const [itemLeft, setItemLeft] = useState(0)
@@ -90,28 +95,77 @@ export default function TimelineItem({
     if (onNameUpdate) onNameUpdate(item.id, newName)
   }
 
+  function handleTouchStart(e: React.TouchEvent) {
+    setIsDragging(true)
+    setDragStartX(e.touches[0].clientX)
+    if (onTouchDragStart) onTouchDragStart(true)
+  }
+
+  function handleTouchMove(e: React.TouchEvent) {
+    onTouchDragStart?.(true)
+    if (isDragging) return false
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    setIsDragging(false)
+    const touch = e.changedTouches[0]
+    const deltaX = touch.clientX - dragStartX
+    const daysDelta = Math.round(deltaX / dayWidth)
+    if (daysDelta !== 0) onDragEnd(item.id, daysDelta)
+    if (onTouchDragEnd) onTouchDragEnd(false)
+  }
+
   return (
     <>
       <div
         ref={itemRef}
-        className={`absolute rounded-md border p-2 cursor-grab ${colorClass} hover:shadow-md transition-shadow ${isDragging ? "opacity-70" : ""}`}
+        className={`
+          absolute 
+          rounded-md 
+          border 
+          p-1 
+          md:p-2 
+          cursor-grab 
+          ${colorClass} 
+          hover:shadow-md 
+          transition-shadow 
+          ${isDragging ? "opacity-70" : ""}
+          flex
+          items-center
+          h-8 
+          md:h-10  
+        `}
         style={{
           left: `${itemLeft}px`,
           width: `${itemWidth}px`,
           minWidth: `${minTextWidth}px`,
-          height: "40px",
           top: "5px",
         }}
         draggable="true"
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         onDoubleClick={() => setEditModalOpen(true)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <Tooltip title={item.name} arrow followCursor>
-          <div className="px-2 truncate text-sm">
+          <div className="px-1 md:px-2 truncate text-xs md:text-sm flex-1">
             <div>{item.name}</div>
           </div>
         </Tooltip>
+
+        <button
+          type="button"
+          className="ml-2 p-1 rounded hover:bg-blue-100 focus:outline-none"
+          aria-label="Edit name"
+          onClick={(e) => {
+            e.stopPropagation()
+            setEditModalOpen(true)
+          }}
+        >
+          <Pencil className="w-4 h-4 text-orange-300" />
+        </button>
       </div>
 
       <EditItem 

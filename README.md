@@ -20,9 +20,10 @@ A timeline component that visualizes items in horizontal lanes with a compact la
 ## What I Would Change
 
 - **Responsive Design**: The timeline would adapts well to different screen sizes.
+- **Edition persistence**: I would like to implement a feature to persiste the name changes that user made, state management can be an approach
+- **State Management**: I would use a more robust state management solution like Redux or React Context to handle updates to timeline items.
 - **Date Search feature**: Date range selection to navigate through different time periods.
 - **Performance Optimization**: For large datasets, I would implement virtualization to only render visible items, improving performance.
-- **State Management**: For a production app, I would use a more robust state management solution like Redux or React Context to handle updates to timeline items.
 - **Accessibility**: I would enhance keyboard navigation and screen reader support for better accessibility.
 - **Custom Styling Options**: I would add more customization options for colors, item heights, and other visual aspects.
 - **Conflict Resolution**: I would implement better handling for overlapping items and header days that can't be resolved by the lane assignment algorithm.
