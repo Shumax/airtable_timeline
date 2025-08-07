@@ -4,24 +4,24 @@ A timeline component that visualizes items in horizontal lanes with a compact la
 
 ## Features
 
-**Automatic Lane Assignment**: Items are algorithmically placed in compact horizontal lanes to prevent visual overlap and maximize vertical space.
-**Zoom Functionality**: Dynamically zoom in and out of the timeline to view details at a daily level or see a multi-month overview.
-**Drag & Drop Date Adjustment**: Intuitively change an item's start and end dates by dragging it horizontally along the timeline.
-**Modal-Based Editing**: Double-click or use the dedicated pencil icon on an item to open a Material-UI dialog for renaming.
-**Dynamic Color-Coding**: Items are automatically assigned one of five distinct color schemes for easy visual differentiation.
-**Item Tooltips**: Hover over truncated item names to see the full name in a tooltip, ensuring readability at any zoom level.
-**Responsive Design**: A fluid layout that works effectively on various screen sizes.
+- **Automatic Lane Assignment**: Items are algorithmically placed in compact horizontal lanes to prevent visual overlap and maximize vertical space.
+- **Zoom Functionality**: Dynamically zoom in and out of the timeline to view details at a daily level or see a multi-month overview.
+- **Drag & Drop Date Adjustment**: Intuitively change an item's start and end dates by dragging it horizontally along the timeline.
+- **Modal-Based Editing**: Double-click or use the dedicated pencil icon on an item to open a Material-UI dialog for renaming.
+- **Dynamic Color-Coding**: Items are automatically assigned one of five distinct color schemes for easy visual differentiation.
+- **Item Tooltips**: Hover over truncated item names to see the full name in a tooltip, ensuring readability at any zoom level.
+- **Responsive Design**: A fluid layout that works effectively on various screen sizes.
 
 ## Technologies Used Requirements
 
-**Framework**: Next.js 15.4.6
-**Language**: TypeScript ^5
-**UI Library**: React ^19.1.0
-**Styling**: Tailwind CSS ^4
-**UI Components**: Material-UI (for Modals and Tooltips)
-**Date & Time**: date-fns ^4.1.0
-**Icons**: Lucide React
-**Testing**: Jest and React Testing Library
+- **Framework**: Next.js 15.4.6
+- **Language**: TypeScript ^5
+- **UI Library**: React ^19.1.0
+- **Styling**: Tailwind CSS ^4
+- **UI Components**: Material-UI (for Modals and Tooltips)
+- **Date & Time**: date-fns ^4.1.0
+- **Icons**: Lucide React
+- **Testing**: Jest and React Testing Library
 
 ## What I Like About This Implementation
 
