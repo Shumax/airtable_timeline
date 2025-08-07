@@ -4,11 +4,24 @@ A timeline component that visualizes items in horizontal lanes with a compact la
 
 ## Features
 
-- Compact lane arrangement that efficiently uses vertical space
-- Zoom in/out functionality to adjust the timeline scale
-- Drag and drop functionality to adjust item start and end dates
-- Name edition functionality to adjust the name of items inline
-- Color-coded items for better visual distinction
+**Automatic Lane Assignment**: Items are algorithmically placed in compact horizontal lanes to prevent visual overlap and maximize vertical space.
+**Zoom Functionality**: Dynamically zoom in and out of the timeline to view details at a daily level or see a multi-month overview.
+**Drag & Drop Date Adjustment**: Intuitively change an item's start and end dates by dragging it horizontally along the timeline.
+**Modal-Based Editing**: Double-click or use the dedicated pencil icon on an item to open a Material-UI dialog for renaming.
+**Dynamic Color-Coding**: Items are automatically assigned one of five distinct color schemes for easy visual differentiation.
+**Item Tooltips**: Hover over truncated item names to see the full name in a tooltip, ensuring readability at any zoom level.
+**Responsive Design**: A fluid layout that works effectively on various screen sizes.
+
+## Technologies Used Requirements
+
+**Framework**: Next.js 15.4.6
+**Language**: TypeScript ^5
+**UI Library**: React ^19.1.0
+**Styling**: Tailwind CSS ^4
+**UI Components**: Material-UI (for Modals and Tooltips)
+**Date & Time**: date-fns ^4.1.0
+**Icons**: Lucide React
+**Testing**: Jest and React Testing Library
 
 ## What I Like About This Implementation
 
@@ -19,14 +32,11 @@ A timeline component that visualizes items in horizontal lanes with a compact la
 
 ## What I Would Change
 
-- **Responsive Design**: The timeline would adapts well to different screen sizes.
-- **Edition persistence**: I would like to implement a feature to persiste the name changes that user made, state management can be an approach
+- **Smooth Drag and Drop**: The timeline drag and drop items can be more friendly with a shadow autoscroll, this realy can be helpful mainly on mobile version.
+- **Edition persistence**: I would like to implement a feature to persiste the name changes that user made, state management can be an approach.
 - **State Management**: I would use a more robust state management solution like Redux or React Context to handle updates to timeline items.
 - **Date Search feature**: Date range selection to navigate through different time periods.
-- **Performance Optimization**: For large datasets, I would implement virtualization to only render visible items, improving performance.
 - **Accessibility**: I would enhance keyboard navigation and screen reader support for better accessibility.
-- **Custom Styling Options**: I would add more customization options for colors, item heights, and other visual aspects.
-- **Conflict Resolution**: I would implement better handling for overlapping items and header days that can't be resolved by the lane assignment algorithm.
 
 ## Design Decisions
 
@@ -40,58 +50,25 @@ I chose to use a card-based design for the items to make them visually distinct 
 
 The zoom functionality was added to allow users to focus on specific time periods or get a broader overview, depending on their needs.
 
-## Testing Approach
+## 🧪 Testing Strategy
 
-If I had more time, I would implement the following tests:
+This project is configured with a testing strategy to ensure reliability and maintainability:
 
-1. **Unit Tests**:
-   - Test the `assignLanes` function with various input scenarios
-   - Test date calculations and formatting
-   - Test the drag-and-drop logic
+1.  **Unit Tests (Jest)**: To validate core business logic, such as the `assignLanes` utility and date calculations.
+2.  **Component Tests (React Testing Library)**: To verify that individual components render correctly and handle user interactions, such as the zoom controls and the edit modal.
 
-2. **Component Tests**:
-   - Test rendering of timeline items
-   - Test zoom functionality
-   - Test date navigation
+## 🏃 How to Run Locally
 
-3. **Integration Tests**:
-   - Test the interaction between components
-   - Test state updates when items are modified
-
-4. **End-to-End Tests**:
-   - Test the complete user flow
-   - Test responsiveness on different screen sizes
-
-5. **Accessibility Tests**:
-   - Test keyboard navigation
-   - Test screen reader compatibility
-   - Test color contrast
-
-I would use Jest and React Testing Library for unit and component tests, and Cypress for end-to-end tests.
-
-## How to Run
-
-1. Clone the repository
-2. Install dependencies: 
-```bash
-  npm install
-  # or
-  yarn install
-```
-3. Run the development server: 
-```bash
-  npm run dev
-  # or
-  yarn dev
-```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## Technologies Used Requirements
-
-- Next.js 15.4.6
-- React ^19.1.0
-- TypeScript ^5
-- Tailwind CSS ^4
-- date-fns for date manipulation ^4.1.0
-- Material UI ^7.0.1
-- Lucide React to icons ^0.487.0
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/Shumax/airtable_timeline
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
+4.  Open [http://localhost:3000](http://localhost:3000) in your browser.
