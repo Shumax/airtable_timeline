@@ -4,10 +4,10 @@ A timeline component that visualizes items in horizontal lanes with a compact la
 
 ## Features
 
-
 - Compact lane arrangement that efficiently uses vertical space
 - Zoom in/out functionality to adjust the timeline scale
 - Drag and drop functionality to adjust item start and end dates
+- Name edition functionality to adjust the name of items inline
 - Color-coded items for better visual distinction
 
 ## What I Like About This Implementation
@@ -20,7 +20,6 @@ A timeline component that visualizes items in horizontal lanes with a compact la
 ## What I Would Change
 
 - **Responsive Design**: The timeline would adapts well to different screen sizes.
-- **Edition feature**: Inline editing of item names, I started but wound't spend more time to solve conflit between modal and drag and drop.
 - **Date Search feature**: Date range selection to navigate through different time periods.
 - **Performance Optimization**: For large datasets, I would implement virtualization to only render visible items, improving performance.
 - **State Management**: For a production app, I would use a more robust state management solution like Redux or React Context to handle updates to timeline items.

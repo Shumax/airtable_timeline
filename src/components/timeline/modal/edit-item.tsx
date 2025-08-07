@@ -30,7 +30,7 @@ export default function EditItem({ open, onClose, onSave, defaultName }: EditIte
   
   return (
     <Dialog open={open} onClose={onClose} >
-      <DialogTitle>Edit Item</DialogTitle>
+      <DialogTitle>Edit Item Name</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus

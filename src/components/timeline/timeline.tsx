@@ -86,6 +86,14 @@ export default function Timeline({ items: initialItems, onItemUpdate }: Timeline
     setIsDraggingOver(false)
   }
 
+  function handleItemNameUpdate(itemId: number, newName: string) {
+    setItems((prevItems) =>
+      prevItems.map((item) => 
+        item.id === itemId ? { ...item, name: newName } : item
+      )
+    )
+  }
+
   return (
     <div className="rounded-2xl border border-gray-200 bg-white">
       <div className="custom-calendar p-4">
@@ -129,6 +137,7 @@ export default function Timeline({ items: initialItems, onItemUpdate }: Timeline
                     dayWidth={dayWidth}
                     getPositionForDate={getPositionForDate}
                     onDragEnd={handleItemDragEnd}
+                    onNameUpdate={handleItemNameUpdate}
                   />                  
                 ))}
               </div>

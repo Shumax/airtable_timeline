@@ -14,6 +14,7 @@ interface TimelineItemProps {
   dayWidth: number
   getPositionForDate: (date: string) => number
   onDragEnd: (itemId: number, daysDelta: number) => void
+  onNameUpdate?: (itemId: number, newName: string) => void
 }
 
 export default function TimelineItem({
@@ -22,12 +23,14 @@ export default function TimelineItem({
   dayWidth,
   getPositionForDate,
   onDragEnd,
+  onNameUpdate
 }: TimelineItemProps) {
   const [itemWidth, setItemWidth] = useState(0)
   const [itemLeft, setItemLeft] = useState(0)
   const [minTextWidth, setMinTextWidth] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const [dragStartX, setDragStartX] = useState(0)
+  const [editModalOpen, setEditModalOpen] = useState(false)
 
   const textMeasureRef = useRef<HTMLSpanElement>(null)
   const itemRef = useRef<HTMLDivElement>(null)
@@ -81,6 +84,12 @@ export default function TimelineItem({
     if (daysDelta !== 0) onDragEnd(item.id, daysDelta)
   }
   
+  function handleEditName(newName: string) {
+    setEditModalOpen(false)
+    
+    if (onNameUpdate) onNameUpdate(item.id, newName)
+  }
+
   return (
     <>
       <div
@@ -96,6 +105,7 @@ export default function TimelineItem({
         draggable="true"
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
+        onDoubleClick={() => setEditModalOpen(true)}
       >
         <Tooltip title={item.name} arrow followCursor>
           <div className="px-2 truncate text-sm">
@@ -103,6 +113,13 @@ export default function TimelineItem({
           </div>
         </Tooltip>
       </div>
+
+      <EditItem 
+        open={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        onSave={handleEditName}
+        defaultName={item.name}
+      />
 
       <span
         ref={textMeasureRef}
